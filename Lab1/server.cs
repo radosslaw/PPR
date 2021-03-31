@@ -13,10 +13,12 @@ namespace socket
 			string data = null;
 			IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 11000);
 			Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
-			try {
+			
+            try {
 				listener.Bind(localEndPoint);
 				listener.Listen(10); 
 				while (true) {
+
 					try{
 						Console.WriteLine("Waiting for a connection...");
 						Socket handler = listener.Accept();
@@ -35,6 +37,7 @@ namespace socket
 			} catch (Exception e) {
 				Console.WriteLine(e.ToString());
 			}
+
 			Console.WriteLine("\nPress ENTER to continue...");
 			Console.Read();
         }
