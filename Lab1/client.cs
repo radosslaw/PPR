@@ -11,6 +11,7 @@ namespace socket
         {
 			byte[] bytes = new byte[1024];
 			try {
+
 				IPHostEntry ipHostInfo = Dns.GetHostEntry(args.Length > 0 ? args[0] : "localhost");
 				IPAddress ipAddress = ipHostInfo.AddressList[0];
 				IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
@@ -28,6 +29,7 @@ namespace socket
 				} catch (Exception e) {
 					Console.WriteLine($"Unexpected exception : {e.ToString()}");
 				}
+
 			} catch (Exception e) {
 				Console.WriteLine( e.ToString());
 			}
