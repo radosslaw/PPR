@@ -10,7 +10,9 @@ xdr_wejscie (XDR *xdrs, wejscie *objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_int (xdrs, &objp->x1))
+	int i;
+	 if (!xdr_vector (xdrs, (char *)objp->x1, 255,
+		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->x2))
 		 return FALSE;
@@ -22,11 +24,9 @@ xdr_wyjscie (XDR *xdrs, wyjscie *objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_int (xdrs, &objp->suma))
-		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->roznica))
-		 return FALSE;
-	 if (!xdr_int (xdrs, &objp->iloczyn))
+	int i;
+	 if (!xdr_vector (xdrs, (char *)objp->x1, 255,
+		sizeof (char), (xdrproc_t) xdr_char))
 		 return FALSE;
 	return TRUE;
 }

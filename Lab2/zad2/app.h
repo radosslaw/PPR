@@ -15,15 +15,13 @@ extern "C" {
 
 
 struct wejscie {
-	int x1;
+	char x1[255];
 	int x2;
 };
 typedef struct wejscie wejscie;
 
 struct wyjscie {
-	int suma;
-	int roznica;
-	int iloczyn;
+	char x1[255];
 };
 typedef struct wyjscie wyjscie;
 

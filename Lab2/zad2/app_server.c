@@ -11,8 +11,15 @@ obliczenia_1_svc(wejscie *argp, struct svc_req *rqstp)
 {
 	static wyjscie  result;
 
-	printf("%X\n", argp->x1);
+	printf("Twoje dane w hexa: ");
+	for (int i=0; i < (argp->x2); ++i)
+	{
+		printf("%02x", argp->x1[i]);
+	}
 
+	printf("\n");
+	fflush(stdout);
+	
 	//result.suma    = argp->x1 + argp->x2;
 	// result.roznica = argp->x1 - argp->x2;
 	// result.iloczyn = argp->x1 * argp->x2;

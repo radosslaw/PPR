@@ -22,8 +22,9 @@ testowy_1(char *host)
 	}
 #endif	/* DEBUG */
 
-	scanf("%s", obliczenia_1_arg.x1);
-
+	printf("Wprowadz dane: ");
+	scanf("%s", &obliczenia_1_arg.x1);
+	obliczenia_1_arg.x2 = strlen(obliczenia_1_arg.x1);
 	result_1 = obliczenia_1(&obliczenia_1_arg, clnt);
 	if (result_1 == (wyjscie *) NULL) {
 		clnt_perror (clnt, "call failed");

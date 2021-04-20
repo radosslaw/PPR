@@ -11,13 +11,12 @@
 	Dlatego nalezy definiowac odpowiednie struktury
 *************************************/
 struct wejscie {
-	int x1;
+	char x1[255];
 	int x2;
+
 };
 struct wyjscie {
-	int suma;
-	int roznica;
-	int iloczyn;
+	char x1[255];
 };
 			/* definicja programu i jego wersji */
 
