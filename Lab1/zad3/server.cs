@@ -16,24 +16,26 @@ namespace socket
 			byte[] bytes = new Byte[1024];
 			string data = null;
 			string data1 = null;
+			IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
 			IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 12345);
-			Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+			Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp );
+			IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+    		EndPoint senderRemote = (EndPoint)sender;
 			try {
 				listener.Bind(localEndPoint);
 				listener.Listen(10); 
 				while (true) {
 					try{
 						Console.WriteLine("Waiting for a connection...");
-						Socket handler = listener.Accept();
 
 						var p = System.Diagnostics.Process.Start("server.exe");
 
 						if (p != null) {
-							int bytesRec = handler.Receive(bytes);  
+							int bytesRec = listener.ReceiveFrom(bytes, ref senderRemote);  
 							data = Encoding.ASCII.GetString(bytes,0,bytesRec); 
 							data1 =  data.Substring(4);
-							Console.WriteLine($"Connection from {handler.RemoteEndPoint.ToString()}");
-							handler.Receive(bytes);
+							Console.WriteLine($"Connection from {listener.RemoteEndPoint.ToString()}");
+							listener.ReceiveFrom(bytes, ref senderRemote);
 							Console.WriteLine($"Received: {data1}, sending it back.");
 							//Create a new file     
 							using (FileStream fs = File.Create(data.Substring(0,4)+".txt"))
@@ -46,9 +48,9 @@ namespace socket
 							var hexString = BitConverter.ToString(msg);
 							hexString = hexString.Replace("-00", "");
 							Console.WriteLine($"Wiadomosc w hexa: {hexString}");
-							handler.Send(msg);	   					
-							handler.Shutdown(SocketShutdown.Both);
-							handler.Close();
+							listener.Send(msg);	   					
+							listener.Shutdown(SocketShutdown.Both);
+							listener.Close();
 
 						} else {
 							Console.WriteLine($"error in proces");

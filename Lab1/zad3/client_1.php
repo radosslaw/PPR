@@ -6,7 +6,7 @@
 	$port = 12345;
 	
 	# tworzymy gniazdo -------------------------------------------------
-	if( ! ( $client = socket_create( AF_INET, SOCK_STREAM, SOL_TCP ) ) ){
+	if( ! ( $client = socket_create( AF_INET, SOCK_DGRAM, 0 ) ) ){
 		print "socket_create(): " 	. socket_strerror( socket_last_error( $client ) ) . "\n";
 		exit( 1 );
 	}
