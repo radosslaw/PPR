@@ -17,19 +17,14 @@
 		exit( 1 );
 	}
 		
-	# odczytujemy wiadomosc od serwera ---------------------------------
+	$processUser = posix_geteuid();
+	$msg = $processUser;
 	echo "Podaj wiadomosc: ";
-	$msg = rtrim(fgets(STDIN), "\n"); 
-
+	$msg .= rtrim(fgets(STDIN), "\n"); 
 	if (!socket_send($client, $msg, strlen($msg), 0)) { 
 		echo "Error! Sending not completed\n";  
 	}
 	
 	# zamykamy gniazdo -------------------------------------------------
 	socket_close( $client );
-	
-	# wyswietlamy wiadomosc --------------------------------------------
-	echo "Twoja wiadomosc: ";
-	print "$msg\n";
-	#-------------------------------------------------------------------
 ?>
