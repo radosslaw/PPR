@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 { struct soap soap;
   double a, b, result;
   if (argc < 3)
-  { fprintf(stderr, "Usage: [add|sub|mul|div|pow] num num\n");
+  { fprintf(stderr, "wpisz dwie liczby\n");
     exit(0);
   }
   soap_init1(&soap, SOAP_XML_INDENT);
